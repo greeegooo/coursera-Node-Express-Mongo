@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/greeegooo/coursera-Node-Express-Mongo/issues"
   },
-  "homepage": "https://github.com/greeegooo/coursera-Node-Express-Mongo#readme"
+  "homepage": "https://github.com/greeegooo/coursera-Node-Express-Mongo#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
