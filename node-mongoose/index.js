@@ -10,16 +10,17 @@ connect
 
     console.log('Connected correctly to server');
 
-    var newDish = Dishes({
-        name: 'Uthapizza',
+    Dishes.create({
+        name: 'Uthapizza2',
         description: 'test'
     })
-
-    newDish
-    .save()
     .then(dish => {
         console.log(dish);
         return Dishes.find({}).exec();
+    })
+    .then(dishes => {
+        console.log(dishes);
+        return Dishes.remove();
     })
     .then(() => mongoose.connection.close())
     .catch(err => console.log(err));
