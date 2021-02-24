@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { findByIdAndUpdate } = require('./models/dishes');
 
 const Dishes = require('./models/dishes');
 
@@ -11,16 +12,32 @@ connect
     console.log('Connected correctly to server');
 
     Dishes.create({
-        name: 'Uthapizza2',
+        name: 'Uthapizza4',
         description: 'test'
     })
     .then(dish => {
         console.log(dish);
-        return Dishes.find({}).exec();
+        return Dishes.findByIdAndUpdate(
+            dish._id, 
+            { $set: {description: 'Updated test'} },
+            { new: true }
+        )
+        .exec();
     })
-    .then(dishes => {
-        console.log(dishes);
-        return Dishes.remove();
+    .then(dish => {
+        console.log(dish);
+
+        dish.comments.push({
+            rating: 5,
+            comment: 'Comment',
+            author: 'Greg'
+        });
+
+        return dish.save();
+    })
+    .then((dish) => {
+        console.log(dish);
+        return Dishes.remove({});
     })
     .then(() => mongoose.connection.close())
     .catch(err => console.log(err));
